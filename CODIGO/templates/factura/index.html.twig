@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Factura index{% endblock %}
+
+{% block body %}
+    <h1>Factura index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdFactura</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.idFactura }}</td>
+                <td>{{ factura.total }}</td>
+                <td>{{ factura.estado == 'C'? 'Cancelada' : 'Pendiente' }}</td>
+                <td>
+                    <a href="{{ path('app_factura_show', {'idFactura': factura.idFactura}) }}">show</a>
+                    <a href="{{ path('app_factura_edit', {'idFactura': factura.idFactura}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_factura_new') }}">Create new</a>
+{% endblock %}
